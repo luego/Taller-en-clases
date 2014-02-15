@@ -36,13 +36,14 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit
     @post = Post.find(params[:id])
+    @users = User.all.map { |user| [user.name,user.id] }
   end
 
   # POST /posts
   # POST /posts.json
   def create
     @post = Post.new(params[:post])
-
+    @users = User.all.map { |user| [user.name,user.id] }
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -58,7 +59,7 @@ class PostsController < ApplicationController
   # PUT /posts/1.json
   def update
     @post = Post.find(params[:id])
-
+    @users = User.all.map { |user| [user.name,user.id] }
     respond_to do |format|
       if @post.update_attributes(params[:post])
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
